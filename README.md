@@ -1,70 +1,439 @@
-# Spring Boot + MySQL Dockerized Application with Jenkins CI/CD Pipeline
+# 🍃 Will of Fire Marketplace - Spring Boot Docker CI/CD Project
 
-## Overview
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-brightgreen)
+![Java](https://img.shields.io/badge/Java-21-orange)
+![MySQL](https://img.shields.io/badge/MySQL-8-blue)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
+![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-red)
 
-This project demonstrates how to Dockerize a Spring Boot application connected to a MySQL database, and how to automate its build and deployment using a Jenkins pipeline. The project includes:
+## 📖 Project Overview
 
-- **Spring Boot application** packaged as a Docker container
-- **MySQL database** running in a separate Docker container
-- A shared Docker network for container communication
-- A **Jenkins pipeline** that builds, deploys, and manages both containers intelligently
+**Will of Fire Marketplace** is a Spring Boot based web application inspired by the Naruto universe.
 
----
+The application provides an anime-themed product marketplace where users can explore ninja-inspired products while experiencing a modern animated UI.
 
-## Repository Contents
+The project demonstrates a complete DevOps workflow:
 
-- `Dockerfile` — Builds Docker image for the Spring Boot app  
-- `application.properties` — Configured for MySQL connection via Docker container hostname  
-- `Jenkinsfile` — Pipeline script for CI/CD automation  
-- Spring Boot source code and Maven project files
-
----
-
-## Prerequisites
-
-- Jenkins installed with Docker and Maven available on the agent node  
-- Docker installed and running on the Jenkins agent machine  
-- Git access to this repository  
+* Spring Boot application development
+* MySQL database integration
+* Thymeleaf frontend development
+* Docker containerization
+* Docker Compose orchestration
+* Jenkins CI/CD automation
+* Automated build and deployment process
 
 ---
 
-## How It Works
+# ✨ Features
 
-1. **Docker Network Setup**  
-   Jenkins pipeline creates a Docker network `app-network` if it does not already exist.
+## 🍥 Application Features
 
-2. **MySQL Container**  
-   The pipeline checks if a MySQL container named `mysql-container` is running; if not, it starts or creates it with root password `1234`.
-
-3. **Build Spring Boot Application**  
-   Runs Maven to clean and package the Spring Boot JAR without tests.
-
-4. **Build Spring Boot Docker Image**  
-   Uses the provided `Dockerfile` to build a Docker image tagged as `spring-app`.
-
-5. **Run Spring Boot Container**  
-   Checks if a container named `spring-app-container` is running. If not, it removes any stopped containers with the same name and runs a new container attached to the Docker network.
-
-6. **Connectivity**  
-   The Spring Boot app connects to MySQL via hostname `mysql-container` on port 3306.
+* User authentication
+* Product listing
+* Product image rendering using Base64 encoding
+* Dynamic Thymeleaf pages
+* Responsive Bootstrap UI
+* Naruto inspired animated interface
+* Hidden Leaf Village theme
+* Chakra animations
+* Sharingan inspired login page
 
 ---
 
-## Configuration Details
+# 🛠️ Technology Stack
 
-### `application.properties`
+## Backend
 
-```properties
-spring.datasource.url=jdbc:mysql://mysql-container:3306/myapplication?createDatabaseIfNotExist=true
-spring.datasource.username=root
-spring.datasource.password=1234
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+| Technology      | Version |
+| --------------- | ------- |
+| Java            | 21      |
+| Spring Boot     | 3.3.4   |
+| Spring MVC      | Latest  |
+| Spring Data JPA | Latest  |
+| Maven           | 3.x     |
+
+## Frontend
+
+* Thymeleaf
+* Bootstrap 5
+* HTML5
+* CSS3
+* Font Awesome
+
+## Database
+
+* MySQL 8.0
+
+## DevOps Tools
+
+* Docker
+* Docker Compose
+* Jenkins
+* GitHub
+
+---
+
+# 🏗️ Application Architecture
+
+```
+                 User
+                  |
+                  |
+             Browser
+                  |
+                  |
+          Spring Boot App
+                  |
+        -------------------
+        |                 |
+    Thymeleaf          JPA/Hibernate
+        |                 |
+        |                 |
+        -------- MySQL --------
+
+
+
+CI/CD Flow
+
+
+Developer
+    |
+    |
+ GitHub Repository
+    |
+    |
+ Jenkins Pipeline
+    |
+    |
+ Maven Build
+    |
+    |
+ Docker Image Build
+    |
+    |
+ Docker Compose Deploy
+    |
+    |
+ Running Containers
+
 ```
 
 ---
-## admin login
 
-- username: admin
-- password: admin
+# 📂 Project Structure
+
+```
+spring_app_sak
+│
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com.sak
+│   │   │
+│   │   └── resources
+│   │       ├── templates
+│   │       │   ├── home.html
+│   │       │   ├── login.html
+│   │       │   └── signup.html
+│   │       │
+│   │       ├── static
+│   │       │
+│   │       └── application.properties
+│
+├── Dockerfile
+├── docker-compose.yml
+├── Jenkinsfile
+└── pom.xml
+
+```
+
 ---
-*Script Done by SAK*
+
+# ⚙️ Spring Boot Configuration
+
+Example database configuration:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/myapplication
+
+spring.datasource.username=root
+
+spring.datasource.password=1234
+
+
+spring.jpa.hibernate.ddl-auto=update
+
+spring.jpa.show-sql=true
+
+```
+
+---
+
+# 🐳 Docker Setup
+
+## Dockerfile
+
+The application is packaged into a Docker image.
+
+Example:
+
+```dockerfile
+FROM openjdk:21-jdk
+
+WORKDIR /app
+
+COPY target/*.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","app.jar"]
+
+```
+
+---
+
+# 🐬 Docker Compose Setup
+
+The application runs with two containers:
+
+```
++---------------------+
+| Spring Boot App     |
+| Port: 8085          |
++----------+----------+
+           |
+           |
++----------v----------+
+| MySQL Database      |
+| Port:3306           |
++---------------------+
+
+```
+
+Start application:
+
+```bash
+docker compose up --build -d
+```
+
+Stop application:
+
+```bash
+docker compose down
+```
+
+Remove unused images:
+
+```bash
+docker image prune -af
+```
+
+---
+
+# 🚀 Jenkins CI/CD Pipeline
+
+The Jenkins pipeline automates:
+
+## Build Stage
+
+```bash
+mvn clean package
+```
+
+Creates Spring Boot JAR file.
+
+---
+
+## Deployment Stage
+
+```bash
+docker compose up --build -d
+```
+
+Builds Docker image and starts containers.
+
+---
+
+## Remove Stage
+
+```bash
+docker compose down
+
+docker image prune -af
+```
+
+Stops containers and cleans Docker resources.
+
+---
+
+# 🔐 Jenkins Setup
+
+## Required Jenkins Plugins
+
+Install:
+
+* Pipeline Plugin
+* Git Plugin
+* Docker Pipeline Plugin
+* Maven Integration Plugin
+
+---
+
+# Docker Permission Setup for Jenkins
+
+Add Jenkins user to Docker group:
+
+```bash
+sudo usermod -aG docker jenkins
+```
+
+Restart Jenkins:
+
+```bash
+sudo systemctl restart jenkins
+```
+
+Verify:
+
+```bash
+sudo -u jenkins docker ps
+```
+
+---
+
+# ☕ Java Configuration Issue
+
+If Maven shows:
+
+```
+release version 21 not supported
+```
+
+Check:
+
+```bash
+java -version
+
+javac -version
+
+mvn -version
+```
+
+Jenkins requires JDK installation, not only JRE.
+
+Install:
+
+```bash
+sudo apt install openjdk-21-jdk
+```
+
+Configure JAVA_HOME in Jenkins.
+
+---
+
+# 🧪 Running Locally
+
+Clone repository:
+
+```bash
+git clone <repository-url>
+```
+
+Move into project:
+
+```bash
+cd spring_app_sak
+```
+
+Build:
+
+```bash
+mvn clean package
+```
+
+Run:
+
+```bash
+java -jar target/*.jar
+```
+
+Application:
+
+```
+http://localhost:8080
+```
+
+---
+
+# 🎨 UI Theme
+
+The application UI is inspired by:
+
+🍃 Hidden Leaf Village
+🔥 Will of Fire
+🍥 Naruto Universe
+⚔️ Shinobi Marketplace
+
+Implemented features:
+
+* Animated chakra particles
+* Fire themed buttons
+* Shinobi login interface
+* Anime marketplace cards
+* Responsive design
+
+---
+
+# 🐳 Docker Hub Deployment Flow
+
+Pipeline flow:
+
+```
+Spring Boot Code
+
+        |
+
+     Maven Build
+
+        |
+
+   Docker Image
+
+        |
+
+ Docker Registry
+
+        |
+
+ Docker Compose
+
+        |
+
+ Production Container
+
+```
+
+---
+
+# 📝 Future Enhancements
+
+* Kubernetes deployment
+* AWS EC2 hosting
+* Terraform infrastructure
+* SonarQube code quality checks
+* Prometheus monitoring
+* Grafana dashboards
+* Role-based authentication
+* Payment integration
+
+---
+
+# 👨‍💻 Author
+
+**Mardan Ali**
+
+Spring Boot Developer | DevOps Enthusiast
+
+---
+
+# 🔥 "A shinobi's true power comes from protecting what matters." 🍃
