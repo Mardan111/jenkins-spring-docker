@@ -1,73 +1,904 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="~{base::layout(~{::section})}">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      th:replace="~{base::layout(~{::section})}">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Join The Shinobi Clan</title>
+
+
+<style>
+
+
+body{
+
+overflow-x:hidden;
+
+}
+
+
+
+
+
+.signup-page{
+
+
+min-height:90vh;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+
+background:
+
+
+linear-gradient(
+
+135deg,
+
+rgba(0,0,0,.8),
+
+rgba(20,80,50,.8)
+
+),
+
+
+url("https://wallpapercave.com/wp/wp4923989.jpg");
+
+
+
+background-size:cover;
+
+
+background-position:center;
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+
+
+/* Chakra particles */
+
+
+.chakra{
+
+
+position:absolute;
+
+
+height:25px;
+
+
+width:25px;
+
+
+background:#ff9800;
+
+
+border-radius:50%;
+
+
+box-shadow:0 0 25px orange;
+
+
+animation:chakraMove 7s infinite;
+
+
+}
+
+
+.c1{
+
+left:15%;
+
+top:20%;
+
+}
+
+
+.c2{
+
+right:15%;
+
+top:40%;
+
+animation-delay:2s;
+
+}
+
+
+.c3{
+
+left:50%;
+
+bottom:10%;
+
+animation-delay:4s;
+
+}
+
+
+
+
+
+@keyframes chakraMove{
+
+
+0%{
+
+transform:translateY(0);
+
+opacity:.3;
+
+}
+
+
+50%{
+
+transform:translateY(-150px);
+
+opacity:1;
+
+}
+
+
+100%{
+
+transform:translateY(0);
+
+opacity:.3;
+
+}
+
+
+}
+
+
+
+
+
+
+/* Signup Card */
+
+
+.shinobi-signup-card{
+
+
+width:650px;
+
+
+padding:35px;
+
+
+
+background:
+
+
+linear-gradient(
+
+145deg,
+
+rgba(20,70,45,.95),
+
+rgba(5,15,20,.95)
+
+);
+
+
+
+border-radius:30px;
+
+
+border:2px solid orange;
+
+
+box-shadow:
+
+
+0 0 30px orange,
+
+0 0 70px rgba(0,150,80,.5);
+
+
+
+backdrop-filter:blur(10px);
+
+
+animation:
+
+entry 1s ease;
+
+
+}
+
+
+
+
+@keyframes entry{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(80px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+
+/* Leaf Symbol */
+
+
+.leaf-logo{
+
+
+width:90px;
+
+height:90px;
+
+
+margin:auto;
+
+
+border-radius:50%;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+
+font-size:45px;
+
+
+background:
+
+
+radial-gradient(
+
+circle,
+
+#ff9800,
+
+red
+
+);
+
+
+
+box-shadow:
+
+0 0 30px orange;
+
+
+
+animation:
+
+pulse 2s infinite;
+
+
+}
+
+
+
+
+@keyframes pulse{
+
+
+50%{
+
+transform:scale(1.1);
+
+}
+
+
+}
+
+
+
+
+
+.title{
+
+
+text-align:center;
+
+
+color:#ffb300;
+
+
+font-weight:900;
+
+
+font-size:38px;
+
+
+text-shadow:
+
+
+0 0 15px orange;
+
+
+}
+
+
+
+
+.subtitle{
+
+
+text-align:center;
+
+
+color:white;
+
+
+}
+
+
+
+
+
+.form-label{
+
+
+color:white;
+
+
+font-weight:bold;
+
+
+}
+
+
+
+
+
+.ninja-input,
+
+
+.form-control{
+
+
+background:
+
+rgba(0,0,0,.5)!important;
+
+
+border:
+
+1px solid #4caf50!important;
+
+
+color:white!important;
+
+
+border-radius:15px;
+
+
+padding:12px;
+
+
+}
+
+
+
+.form-control:focus{
+
+
+border-color:#ff9800!important;
+
+
+box-shadow:
+
+0 0 20px orange!important;
+
+
+}
+
+
+
+
+
+
+select option{
+
+
+background:#111;
+
+
+color:white;
+
+
+}
+
+
+
+
+
+.shinobi-button{
+
+
+width:100%;
+
+
+padding:14px;
+
+
+border-radius:30px;
+
+
+border:none;
+
+
+
+background:
+
+
+linear-gradient(
+
+45deg,
+
+orange,
+
+red
+
+);
+
+
+
+color:white;
+
+
+font-weight:bold;
+
+
+font-size:18px;
+
+
+transition:.4s;
+
+
+}
+
+
+
+
+
+.shinobi-button:hover{
+
+
+transform:scale(1.05);
+
+
+box-shadow:
+
+0 0 30px orange;
+
+
+}
+
+
+
+
+
+
+.footer-link{
+
+
+color:#ffc107;
+
+
+text-decoration:none;
+
+
+}
+
+
+
+.footer-link:hover{
+
+
+color:red;
+
+
+}
+
+
+
+
+.message{
+
+
+text-align:center;
+
+
+margin-top:15px;
+
+
+font-weight:bold;
+
+
+}
+
+
+
+</style>
+
+
 </head>
+
+
+
 <body>
-    <section>
-        <div class="container mt-5 p-5">
-            <div class="row">
-                <div class="col-md-6 p-3">
-					<img alt=""
-						src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-working-with-laptop-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--on-workplace-work-pack-people-illustrations-5282908.png?f=webp"
-						width="100%" height="500px">
-				</div>
-                <div class="col-md-6 p-6">
-                    <div class="card shadow-lg p-3 mb-5 bg-body rounded">
-                        <div class="card-header">
-							<p class="fs-4 text-center">Signup</p>
-						</div>
-                        <div class="card-body">
-                            <form th:action="@{/signup}" method="post" th:object="${user}">
-                                <div class="row">
-                                    <div class="col">
-                                        <label class="form-label" for="userName">Username:</label>
-                                        <input class="form-control" type="text" id="userName" th:field="*{userName}" required>
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label"  for="emailId">Email:</label>
-                                        <input class="form-control" type="email" id="emailId" th:field="*{emailId}" required>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <label class="form-label"  for="gender">Gender:</label>
-                                        <select class="form-control" id="gender" th:field="*{gender}" required>
-                                            <option value="">Select Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <label class="form-label"  for="phoneNumber">PhoneNumber:</label>
-                                        <input class="form-control" type="number" id="phoneNumber" th:field="*{phoneNumber}" required>
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label" for="emailId">Password:</label>
-                                        <input class="form-control" type="password" id="password" th:field="*{password}" required>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <button type="submit" class="btn bg-primary text-white col-md-12">Sign Up</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer text-center">
-							<a href="#" class="text-decoration-none">Forgot Password</a>
-							<br> Have a account ? <a href="/login" class="text-decoration-none">Login</a>
-						</div>
-                    </div>
-                </div>
-    
-            <div th:if="${error}" class="error" th:text="${error}"></div>
-            <div th:if="${success}" class="success" th:text="${success}"></div>
-        </div>
-        </div>
-    </section>
+
+
+<section>
+
+
+
+<div class="signup-page">
+
+
+<div class="chakra c1"></div>
+
+<div class="chakra c2"></div>
+
+<div class="chakra c3"></div>
+
+
+
+
+
+<div class="shinobi-signup-card">
+
+
+
+<div class="leaf-logo">
+
+🍃
+
+</div>
+
+
+
+
+<h1 class="title">
+
+Join The Hidden Leaf
+
+</h1>
+
+
+
+<p class="subtitle">
+
+Create your shinobi identity and carry the Will of Fire
+
+</p>
+
+
+
+
+
+
+<form th:action="@{/signup}"
+      method="post"
+      th:object="${user}">
+
+
+
+
+
+<div class="row mb-3">
+
+
+<div class="col-md-6">
+
+
+<label class="form-label">
+
+Shinobi Name
+
+</label>
+
+
+<input
+
+class="form-control ninja-input"
+
+type="text"
+
+th:field="*{userName}"
+
+placeholder="Enter ninja name"
+
+required>
+
+
+</div>
+
+
+
+
+<div class="col-md-6">
+
+
+<label class="form-label">
+
+Village Email
+
+</label>
+
+
+<input
+
+class="form-control ninja-input"
+
+type="email"
+
+th:field="*{emailId}"
+
+placeholder="Enter email"
+
+required>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Clan Identity
+
+</label>
+
+
+
+<select
+
+class="form-control ninja-input"
+
+th:field="*{gender}"
+
+required>
+
+
+<option value="">
+
+Select Identity
+
+</option>
+
+
+<option value="male">
+
+Male Shinobi
+
+</option>
+
+
+<option value="female">
+
+Female Shinobi
+
+</option>
+
+
+<option value="other">
+
+Other
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+<div class="row mb-3">
+
+
+<div class="col-md-6">
+
+
+<label class="form-label">
+
+Communication Scroll
+
+</label>
+
+
+
+<input
+
+class="form-control ninja-input"
+
+type="number"
+
+th:field="*{phoneNumber}"
+
+placeholder="Phone number"
+
+required>
+
+
+</div>
+
+
+
+
+
+<div class="col-md-6">
+
+
+<label class="form-label">
+
+Secret Jutsu Password
+
+</label>
+
+
+<input
+
+class="form-control ninja-input"
+
+type="password"
+
+th:field="*{password}"
+
+placeholder="Create password"
+
+required>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<button
+
+type="submit"
+
+class="shinobi-button">
+
+
+🔥 Become A Shinobi
+
+
+</button>
+
+
+
+
+
+</form>
+
+
+
+
+
+
+<div class="text-center mt-4 text-white">
+
+
+Already part of a clan?
+
+
+<a href="/login"
+
+class="footer-link">
+
+
+Enter Village
+
+
+</a>
+
+
+</div>
+
+
+
+
+<div th:if="${error}"
+
+class="message text-danger"
+
+th:text="${error}">
+
+</div>
+
+
+
+<div th:if="${success}"
+
+class="message text-success"
+
+th:text="${success}">
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
 </body>
+
+
 </html>

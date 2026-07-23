@@ -22,51 +22,41 @@ body {
 }
 
 
-
 /* Main Container */
 
 .login-page {
 
+    min-height:90vh;
 
-min-height:90vh;
+    display:flex;
 
+    align-items:center;
 
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
+    justify-content:center;
 
 
-background:
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        rgba(0,0,0,.75),
+
+        rgba(120,0,0,.65)
+
+    ),
+
+    url("https://wallpapercave.com/wp/wp4923989.jpg");
 
 
-linear-gradient(
+    background-size:cover;
 
-135deg,
+    background-position:center;
 
-rgba(0,0,0,.8),
+    position:relative;
 
-rgba(120,0,0,.7)
-
-),
-
-url("https://wallpapercave.com/wp/wp4923989.jpg");
-
-
-background-size:cover;
-
-
-background-position:center;
-
-
-position:relative;
-
-
-overflow:hidden;
-
+    overflow:hidden;
 
 }
 
@@ -76,34 +66,29 @@ overflow:hidden;
 
 /* Chakra particles */
 
-
 .chakra {
 
+    position:absolute;
 
-position:absolute;
+    width:25px;
 
-
-width:25px;
-
-
-height:25px;
+    height:25px;
 
 
-background:#ff9800;
+    background:#ff9800;
 
 
-border-radius:50%;
+    border-radius:50%;
 
 
-box-shadow:
+    box-shadow:
 
-0 0 20px orange;
+    0 0 20px orange;
 
 
-animation:
+    animation:
 
-float 6s infinite;
-
+    float 6s infinite;
 
 }
 
@@ -118,7 +103,6 @@ top:20%;
 }
 
 
-
 .c2{
 
 left:80%;
@@ -130,7 +114,6 @@ animation-delay:2s;
 }
 
 
-
 .c3{
 
 left:50%;
@@ -140,6 +123,7 @@ top:80%;
 animation-delay:4s;
 
 }
+
 
 
 
@@ -180,41 +164,144 @@ opacity:.3;
 
 
 
-/* Login Card */
-
+/* Hidden Leaf Glass Login Card */
 
 .shinobi-card {
 
 
-width:420px;
+    width:420px;
 
 
-padding:35px;
+    padding:35px;
 
 
-background:
+    background:
 
 
-rgba(0,0,0,.85);
+    linear-gradient(
+
+        145deg,
+
+        rgba(20,70,45,.92),
+
+        rgba(5,15,20,.95)
+
+    );
 
 
-border-radius:25px;
+    border-radius:25px;
 
 
-border:
+    border:
 
-1px solid orange;
-
-
-box-shadow:
+    2px solid rgba(255,152,0,.8);
 
 
-0 0 40px red;
+    box-shadow:
 
 
-animation:
+    0 0 25px rgba(255,152,0,.7),
 
-cardEntry 1s ease;
+    0 0 60px rgba(0,150,80,.5),
+
+    inset 0 0 30px rgba(255,255,255,.05);
+
+
+
+    backdrop-filter:blur(10px);
+
+
+    animation:
+
+    cardEntry 1s ease;
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+/* Chakra light animation */
+
+.shinobi-card::before {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:-50%;
+
+
+    left:-50%;
+
+
+    width:200%;
+
+
+    height:200%;
+
+
+    background:
+
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,152,0,.25),
+
+        transparent
+
+    );
+
+
+    transform:rotate(25deg);
+
+
+    animation:
+
+    chakraGlow 5s infinite;
+
+
+}
+
+
+
+
+
+@keyframes chakraGlow {
+
+
+0%{
+
+transform:translateX(-100%) rotate(25deg);
+
+}
+
+
+50%{
+
+transform:translateX(100%) rotate(25deg);
+
+}
+
+
+100%{
+
+transform:translateX(-100%) rotate(25deg);
+
+}
 
 
 }
@@ -232,9 +319,7 @@ from{
 opacity:0;
 
 
-transform:
-
-translateY(80px);
+transform:translateY(80px);
 
 
 }
@@ -246,9 +331,7 @@ to{
 opacity:1;
 
 
-transform:
-
-translateY(0);
+transform:translateY(0);
 
 
 }
@@ -262,7 +345,6 @@ translateY(0);
 
 
 /* Sharingan */
-
 
 .sharingan {
 
@@ -295,8 +377,8 @@ black 70%
 );
 
 
-
 box-shadow:
+
 
 0 0 30px red;
 
@@ -335,10 +417,12 @@ transform:rotate(360deg);
 
 
 
+/* Title */
+
 .title {
 
 
-color:#ff9800;
+color:#ffb300;
 
 
 font-weight:900;
@@ -353,10 +437,13 @@ text-align:center;
 text-shadow:
 
 
-0 0 15px orange;
+0 0 10px #ff9800,
+
+0 0 30px #ff5722;
 
 
 }
+
 
 
 
@@ -372,21 +459,27 @@ text-align:center;
 
 margin-bottom:25px;
 
-
 }
 
 
 
 
+
+/* Inputs */
+
+
 .ninja-input {
 
 
-background:#111!important;
+background:
+
+rgba(0,0,0,.45)!important;
 
 
 border:
 
-1px solid orange!important;
+
+1px solid #4caf50!important;
 
 
 color:white!important;
@@ -402,17 +495,27 @@ padding:12px;
 
 
 
+
+
 .ninja-input:focus {
+
+
+border-color:#ff9800!important;
 
 
 box-shadow:
 
-0 0 20px orange!important;
+
+0 0 20px #ff9800!important;
 
 
 }
 
 
+
+
+
+/* Button */
 
 
 .fire-button {
@@ -464,12 +567,11 @@ transition:.4s;
 .fire-button:hover {
 
 
-transform:
-
-scale(1.08);
+transform:scale(1.08);
 
 
 box-shadow:
+
 
 0 0 30px orange;
 
@@ -488,7 +590,6 @@ color:#ffc107;
 
 text-decoration:none;
 
-
 }
 
 
@@ -498,14 +599,11 @@ text-decoration:none;
 
 color:red;
 
-
 }
 
 
 
-
 </style>
-
 
 </head>
 
@@ -531,6 +629,7 @@ color:red;
 
 
 <div class="shinobi-card">
+
 
 
 <div class="sharingan"></div>
@@ -629,7 +728,9 @@ type="submit"
 
 class="fire-button">
 
+
 🔥 Enter Village
+
 
 </button>
 
@@ -672,6 +773,7 @@ Create Shinobi Account
 
 
 
+
 <div th:if="${error}"
 
 class="text-danger text-center mt-3"
@@ -682,15 +784,14 @@ th:text="${error}">
 
 
 
-</div>
 
+</div>
 
 
 </div>
 
 
 </section>
-
 
 
 </body>
