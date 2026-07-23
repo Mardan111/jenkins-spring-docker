@@ -4,225 +4,143 @@
       th:replace="~{base::layout(~{::section})}">
 
 <head>
-
 <meta charset="UTF-8">
+<title>Join Hidden Leaf</title>
+</head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Join The Shinobi Clan</title>
+<body>
+
+<section>
 
 
 <style>
 
-
-body{
-
-overflow-x:hidden;
-
-}
-
-
-
-
-
 .signup-page{
-
 
 min-height:90vh;
 
-
 display:flex;
-
 
 align-items:center;
 
-
 justify-content:center;
-
-
-
-background:
-
-
-linear-gradient(
-
-135deg,
-
-rgba(0,0,0,.8),
-
-rgba(20,80,50,.8)
-
-),
-
-
-url("https://wallpapercave.com/wp/wp4923989.jpg");
-
-
-
-background-size:cover;
-
-
-background-position:center;
-
 
 position:relative;
 
-
 overflow:hidden;
 
+background:
+
+linear-gradient(
+135deg,
+rgba(0,0,0,.85),
+rgba(0,80,50,.75)
+),
+
+url("https://wallpapercave.com/wp/wp4923989.jpg");
+
+background-size:cover;
+
+background-position:center;
 
 }
 
 
-
-
-
-
-/* Chakra particles */
-
+/* chakra animation */
 
 .chakra{
 
-
 position:absolute;
 
-
-height:25px;
-
-
-width:25px;
-
+width:35px;
+height:35px;
 
 background:#ff9800;
 
-
 border-radius:50%;
 
+box-shadow:
+0 0 20px orange,
+0 0 40px red;
 
-box-shadow:0 0 25px orange;
-
-
-animation:chakraMove 7s infinite;
-
+animation:chakraMove 8s infinite;
 
 }
 
 
 .c1{
-
-left:15%;
-
+left:10%;
 top:20%;
-
 }
 
 
 .c2{
-
 right:15%;
-
-top:40%;
-
+top:35%;
 animation-delay:2s;
-
 }
 
 
 .c3{
-
 left:50%;
-
 bottom:10%;
-
 animation-delay:4s;
-
 }
-
-
 
 
 
 @keyframes chakraMove{
 
-
 0%{
-
-transform:translateY(0);
-
-opacity:.3;
-
+transform:translateY(0) scale(1);
+opacity:.4;
 }
-
 
 50%{
-
-transform:translateY(-150px);
-
+transform:translateY(-120px) scale(1.4);
 opacity:1;
-
 }
-
 
 100%{
-
-transform:translateY(0);
-
-opacity:.3;
-
+transform:translateY(0) scale(1);
+opacity:.4;
 }
-
 
 }
 
 
 
+/* signup card */
 
 
-
-/* Signup Card */
-
-
-.shinobi-signup-card{
+.shinobi-card{
 
 
-width:650px;
-
+width:700px;
 
 padding:35px;
 
 
-
 background:
 
-
-linear-gradient(
-
-145deg,
-
-rgba(20,70,45,.95),
-
-rgba(5,15,20,.95)
-
-);
+rgba(10,20,15,.85);
 
 
+border-radius:25px;
 
-border-radius:30px;
 
+border:
 
-border:2px solid orange;
+1px solid #ff9800;
 
 
 box-shadow:
 
-
-0 0 30px orange,
-
-0 0 70px rgba(0,150,80,.5);
+0 0 30px rgba(255,152,0,.7);
 
 
-
-backdrop-filter:blur(10px);
+backdrop-filter:blur(15px);
 
 
 animation:
@@ -234,9 +152,7 @@ entry 1s ease;
 
 
 
-
 @keyframes entry{
-
 
 from{
 
@@ -255,14 +171,11 @@ transform:translateY(0);
 
 }
 
-
 }
 
 
 
-
-
-/* Leaf Symbol */
+/* Logo */
 
 
 .leaf-logo{
@@ -272,70 +185,56 @@ width:90px;
 
 height:90px;
 
-
 margin:auto;
 
 
 border-radius:50%;
 
 
-display:flex;
+background:
 
+radial-gradient(circle,#ff9800,#b30000);
+
+
+display:flex;
 
 align-items:center;
 
-
 justify-content:center;
-
 
 
 font-size:45px;
 
 
-background:
-
-
-radial-gradient(
-
-circle,
-
-#ff9800,
-
-red
-
-);
-
-
-
 box-shadow:
 
-0 0 30px orange;
-
+0 0 35px orange;
 
 
 animation:
 
-pulse 2s infinite;
+rotateLogo 6s infinite linear;
 
 
 }
 
 
 
+@keyframes rotateLogo{
 
-@keyframes pulse{
+from{
 
-
-50%{
-
-transform:scale(1.1);
+transform:rotate(0deg);
 
 }
 
+to{
+
+transform:rotate(360deg);
 
 }
 
-
+}
 
 
 
@@ -344,18 +243,14 @@ transform:scale(1.1);
 
 text-align:center;
 
-
 color:#ffb300;
 
+font-size:38px;
 
 font-weight:900;
 
 
-font-size:38px;
-
-
 text-shadow:
-
 
 0 0 15px orange;
 
@@ -364,51 +259,30 @@ text-shadow:
 
 
 
-
 .subtitle{
-
 
 text-align:center;
 
-
 color:white;
 
+margin-bottom:25px;
 
 }
 
 
 
+/* Inputs */
 
 
-.form-label{
+.ninja-input{
 
 
-color:white;
-
-
-font-weight:bold;
-
-
-}
-
-
-
-
-
-.ninja-input,
-
-
-.form-control{
-
-
-background:
-
-rgba(0,0,0,.5)!important;
+background:#07140f!important;
 
 
 border:
 
-1px solid #4caf50!important;
+1px solid #ff9800!important;
 
 
 color:white!important;
@@ -423,11 +297,7 @@ padding:12px;
 }
 
 
-
-.form-control:focus{
-
-
-border-color:#ff9800!important;
+.ninja-input:focus{
 
 
 box-shadow:
@@ -439,31 +309,15 @@ box-shadow:
 
 
 
+/* Button */
 
 
-
-select option{
-
-
-background:#111;
-
-
-color:white;
-
-
-}
-
-
-
-
-
-.shinobi-button{
+.fire-button{
 
 
 width:100%;
 
-
-padding:14px;
+padding:15px;
 
 
 border-radius:30px;
@@ -472,29 +326,21 @@ border-radius:30px;
 border:none;
 
 
+font-weight:bold;
 
-background:
-
-
-linear-gradient(
-
-45deg,
-
-orange,
-
-red
-
-);
-
+font-size:18px;
 
 
 color:white;
 
 
-font-weight:bold;
+background:
 
-
-font-size:18px;
+linear-gradient(
+45deg,
+#ff9800,
+#e00000
+);
 
 
 transition:.4s;
@@ -504,9 +350,7 @@ transition:.4s;
 
 
 
-
-
-.shinobi-button:hover{
+.fire-button:hover{
 
 
 transform:scale(1.05);
@@ -521,44 +365,56 @@ box-shadow:
 
 
 
+/* floating symbols */
 
 
-
-.footer-link{
-
-
-color:#ffc107;
+.symbol{
 
 
-text-decoration:none;
+position:absolute;
+
+font-size:60px;
+
+color:white;
+
+opacity:.08;
+
+
+animation:
+
+floatSymbol 10s infinite;
 
 
 }
 
 
 
-.footer-link:hover{
+.s1{
 
-
-color:red;
-
+left:5%;
+bottom:20%;
 
 }
 
 
 
+.s2{
 
-.message{
+right:5%;
+top:20%;
 
-
-text-align:center;
-
-
-margin-top:15px;
+}
 
 
-font-weight:bold;
 
+@keyframes floatSymbol{
+
+
+50%{
+
+transform:translateY(-100px);
+
+}
 
 }
 
@@ -567,41 +423,35 @@ font-weight:bold;
 </style>
 
 
-</head>
-
-
-
-<body>
-
-
-<section>
-
 
 
 <div class="signup-page">
 
 
 <div class="chakra c1"></div>
-
 <div class="chakra c2"></div>
-
 <div class="chakra c3"></div>
 
 
+<div class="symbol s1">
+🍃
+</div>
+
+
+<div class="symbol s2">
+🔥
+</div>
 
 
 
-<div class="shinobi-signup-card">
-
+<div class="shinobi-card">
 
 
 <div class="leaf-logo">
 
-🍃
+🍥
 
 </div>
-
-
 
 
 <h1 class="title">
@@ -609,7 +459,6 @@ font-weight:bold;
 Join The Hidden Leaf
 
 </h1>
-
 
 
 <p class="subtitle">
@@ -620,40 +469,27 @@ Create your shinobi identity and carry the Will of Fire
 
 
 
-
-
-
-<form th:action="@{/signup}"
+<form th:action="@{/signup}" 
       method="post"
       th:object="${user}">
 
 
+<div class="row">
 
 
-
-<div class="row mb-3">
-
-
-<div class="col-md-6">
+<div class="col-md-6 mb-3">
 
 
-<label class="form-label">
-
+<label class="text-white">
 Shinobi Name
-
 </label>
 
 
-<input
-
+<input 
 class="form-control ninja-input"
-
 type="text"
-
-th:field="*{userName}"
-
 placeholder="Enter ninja name"
-
+th:field="*{userName}"
 required>
 
 
@@ -661,27 +497,19 @@ required>
 
 
 
+<div class="col-md-6 mb-3">
 
-<div class="col-md-6">
 
-
-<label class="form-label">
-
+<label class="text-white">
 Village Email
-
 </label>
 
 
 <input
-
 class="form-control ninja-input"
-
 type="email"
-
-th:field="*{emailId}"
-
 placeholder="Enter email"
-
+th:field="*{emailId}"
 required>
 
 
@@ -693,153 +521,93 @@ required>
 
 
 
-
-
-
-<div class="mb-3">
-
-
-<label class="form-label">
-
+<label class="text-white">
 Clan Identity
-
 </label>
 
 
-
-<select
-
-class="form-control ninja-input"
-
-th:field="*{gender}"
-
-required>
-
+<select class="form-control ninja-input mb-3"
+th:field="*{gender}">
 
 <option value="">
-
 Select Identity
-
 </option>
 
-
-<option value="male">
-
-Male Shinobi
-
+<option>
+Uchiha
 </option>
 
-
-<option value="female">
-
-Female Shinobi
-
+<option>
+Uzumaki
 </option>
 
-
-<option value="other">
-
-Other
-
+<option>
+Hyuga
 </option>
 
+<option>
+Nara
+</option>
 
 </select>
 
 
-</div>
 
 
-
-
-
-
-<div class="row mb-3">
+<div class="row">
 
 
 <div class="col-md-6">
 
 
-<label class="form-label">
-
+<label class="text-white">
 Communication Scroll
-
 </label>
 
 
-
 <input
-
 class="form-control ninja-input"
-
 type="number"
-
-th:field="*{phoneNumber}"
-
 placeholder="Phone number"
-
-required>
+th:field="*{phoneNumber}">
 
 
 </div>
-
-
 
 
 
 <div class="col-md-6">
 
 
-<label class="form-label">
-
+<label class="text-white">
 Secret Jutsu Password
-
 </label>
 
 
 <input
-
 class="form-control ninja-input"
-
 type="password"
-
-th:field="*{password}"
-
 placeholder="Create password"
-
-required>
-
-
-</div>
+th:field="*{password}">
 
 
 </div>
 
 
+</div>
 
 
 
 
-<button
-
-type="submit"
-
-class="shinobi-button">
-
+<button class="fire-button mt-4">
 
 🔥 Become A Shinobi
-
 
 </button>
 
 
 
-
-
 </form>
-
-
-
 
 
 
@@ -850,12 +618,9 @@ Already part of a clan?
 
 
 <a href="/login"
-
-class="footer-link">
-
+style="color:#ff9800">
 
 Enter Village
-
 
 </a>
 
@@ -864,41 +629,14 @@ Enter Village
 
 
 
-
-<div th:if="${error}"
-
-class="message text-danger"
-
-th:text="${error}">
-
-</div>
-
-
-
-<div th:if="${success}"
-
-class="message text-success"
-
-th:text="${success}">
-
-</div>
-
-
-
-
-
-
 </div>
 
 
 </div>
-
 
 
 </section>
 
-
 </body>
-
 
 </html>
