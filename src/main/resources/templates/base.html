@@ -1,50 +1,470 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymleaf.org" th:fragment="layout(content)">
-<head>
-    <meta charset="ISO-8859-1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-layer-group"></i> SAK Group</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="/"><i class="fa-solid fa-house"></i> Home</a>
-					</li>
-				</ul>
-                <ul class="navbar-nav se-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login"><i
-                        class="fa-solid fa-right-to-bracket"></i> LOGIN</a>
-                    </li>
-                    <li class="nav-item">
-						<a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i> REGISTER</a>
-					</li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-	<div th:replace="${content}"></div>
-    <!-- Footer -->
-        <footer class="container-fluid bg-primary text-center text-white pb-1 fixed-bottom">
-            <p>© SAK 2024 sak.group</p>
-        </footer>
-    <!-- Footer -->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(content)">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Hidden Leaf Marketplace</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+<style>
+
+
+/* GLOBAL BACKGROUND */
+
+body {
+
+    background:
+
+    radial-gradient(circle at top,
+    #451a03,
+    #000 60%);
+
+    min-height:100vh;
+
+    color:white;
+
+}
+
+
+
+/* NAVBAR */
+
+
+.ninja-nav {
+
+
+background:
+
+linear-gradient(
+90deg,
+#000000,
+#8b0000,
+#ff6a00
+);
+
+
+box-shadow:
+
+0 0 25px orange;
+
+
+animation:
+
+navGlow 4s infinite alternate;
+
+
+}
+
+
+
+@keyframes navGlow {
+
+
+from {
+
+box-shadow:
+
+0 0 15px red;
+
+}
+
+
+to {
+
+box-shadow:
+
+0 0 35px orange;
+
+}
+
+
+}
+
+
+
+
+.navbar-brand {
+
+
+font-size:26px;
+
+font-weight:900;
+
+color:#ffcc00!important;
+
+
+text-shadow:
+
+0 0 10px orange;
+
+
+}
+
+
+
+.nav-link {
+
+
+color:white!important;
+
+font-weight:bold;
+
+transition:.3s;
+
+
+}
+
+
+
+.nav-link:hover {
+
+
+color:#ffd700!important;
+
+
+transform:
+
+translateY(-3px);
+
+
+}
+
+
+
+
+/* CONTENT ANIMATION */
+
+
+.main-content {
+
+
+animation:
+
+pageEnter 1s ease;
+
+
+}
+
+
+
+@keyframes pageEnter {
+
+
+from {
+
+
+opacity:0;
+
+transform:
+
+translateY(40px);
+
+
+}
+
+
+
+to {
+
+
+opacity:1;
+
+transform:
+
+translateY(0);
+
+
+}
+
+
+}
+
+
+
+
+/* FOOTER */
+
+
+.ninja-footer {
+
+
+background:
+
+linear-gradient(
+90deg,
+#000,
+#450000
+);
+
+
+border-top:
+
+2px solid orange;
+
+
+box-shadow:
+
+0 -5px 20px red;
+
+
+}
+
+
+
+
+
+/* NARUTO CHAKRA EFFECT */
+
+
+.chakra {
+
+
+position:fixed;
+
+width:250px;
+
+height:250px;
+
+border-radius:50%;
+
+
+background:
+
+radial-gradient(
+
+circle,
+
+rgba(255,165,0,.5),
+
+transparent 70%
+
+);
+
+
+animation:
+
+chakraMove 8s infinite alternate;
+
+
+z-index:-1;
+
+
+}
+
+
+
+@keyframes chakraMove {
+
+
+from {
+
+
+transform:
+
+translate(-100px,-100px);
+
+
+}
+
+
+to {
+
+
+transform:
+
+translate(100vw,80vh);
+
+
+}
+
+
+}
+
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<div class="chakra"></div>
+
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark ninja-nav">
+
+
+<div class="container-fluid">
+
+
+<a class="navbar-brand"
+href="/">
+
+
+🍃 Hidden Leaf
+
+
+</a>
+
+
+
+<button class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarSupportedContent">
+
+
+<span class="navbar-toggler-icon"></span>
+
+
+</button>
+
+
+
+<div class="collapse navbar-collapse"
+id="navbarSupportedContent">
+
+
+<ul class="navbar-nav me-auto">
+
+
+<li class="nav-item">
+
+
+<a class="nav-link"
+href="/">
+
+
+<i class="fa-solid fa-house"></i>
+
+Home
+
+</a>
+
+
+</li>
+
+
+</ul>
+
+
+
+<ul class="navbar-nav">
+
+
+<li class="nav-item">
+
+
+<a class="nav-link"
+href="/login">
+
+
+🔥 Login
+
+
+</a>
+
+
+</li>
+
+
+
+<li class="nav-item">
+
+
+<a class="nav-link"
+href="/signup">
+
+
+🍥 Register
+
+
+</a>
+
+
+</li>
+
+
+</ul>
+
+
+
+</div>
+
+
+</div>
+
+
+</nav>
+
+
+
+
+<!-- PAGE CONTENT -->
+
+
+<div class="main-content"
+style="padding-top:80px; padding-bottom:70px;">
+
+
+<div th:replace="${content}"></div>
+
+
+</div>
+
+
+
+
+
+<!-- FOOTER -->
+
+
+<footer class="container-fluid text-center text-white fixed-bottom ninja-footer">
+
+
+<p class="mb-1">
+
+
+🍃 SAK Hidden Leaf Marketplace © 2026
+
+
+</p>
+
+
+</footer>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+
+</script>
+
+
 </body>
+
 </html>
