@@ -1,151 +1,564 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org" th:replace="~{base::layout(~{::section})}">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Hidden Leaf Marketplace</title>
 </head>
+
 <body>
-    <section>
-    <!-- Main Content -->
-    <main class="flex-fill min-vh-100 text-center d-flex flex-column justify-content-center">
-        <div class="container my-5">
-            <h1 class="display-4">Welcome to sak Group</h1>
-            <p class="lead">Your content goes here.</p>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div id="touristCarousel" class="carousel slide pb-3" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <!-- Coorg Image Slide -->
-                        <div class="carousel-item active">
-                            <div class="position-relative overflow-hidden text-center">
-                                <img src="https://www.coorgwildernessresort.in/images/our-diaries/a-land-of-historical-sites-waterfalls-scenic-rivers/a-land-of-historical-sites-waterfalls-scenic-rivers-1.jpg" 
-                                     alt="Coorg" 
-                                     class="img-fluid w-100" 
-                                     style="height: 400px; object-fit: cover;">
-                                <div class="position-absolute top-50 start-50 translate-middle text-white" 
-                                     style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
-                                    <h1 class="display-5 font-weight-bold">Coorg</h1>
-                                    <p class="lead">Coorg or Kodagu- is known for its serenity, and nature's bounty.</p>
-                                </div>
-                            </div>
-                        </div>
-                
-                        <!-- Mysore Image Slide -->
-                        <div class="carousel-item">
-                            <div class="position-relative overflow-hidden text-center">
-                                <img src="https://royalsamrattravels.in/wp-content/uploads/2023/02/Mysore-Palace-One-of-The-Most-Famous-Tourist-Places-in-Mysore.jpg" 
-                                     alt="Mysore" 
-                                     class="img-fluid w-100" 
-                                     style="height: 400px; object-fit: cover;">
-                                <div class="position-absolute top-50 start-50 translate-middle text-white" 
-                                     style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
-                                    <h1 class="display-5 font-weight-bold">Mysore</h1>
-                                    <p class="lead">The city is also known as the City of Palaces</p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Bangalore Image Slide -->
-                        <div class="carousel-item">
-                            <div class="position-relative overflow-hidden text-center">
-                                <img src="https://assets-news.housing.com/news/wp-content/uploads/2022/06/29184410/10-best-tourist-places-to-visit-in-Bangalore-and-must-visit-places-near-it-686x400.jpg" 
-                                    alt="Bangalore" 
-                                    class="img-fluid w-100" 
-                                    style="height: 400px; object-fit: cover;">
-                                <div class="position-absolute top-50 start-50 translate-middle text-white" 
-                                    style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
-                                    <h1 class="display-5 font-weight-bold">Bangalore</h1>
-                                    <p class="lead">The city is also known as the City of Palaces</p>
-                                </div>
-                            </div>
-                        </div>
+<section>
 
-                        <!-- Kalaburgi -->
-                        <div class="carousel-item">
-                            <div class="position-relative overflow-hidden text-center">
-                                <img src="https://karnatakatourism.org/wp-content/uploads/2020/06/kalaburagi_fort.jpg" 
-                                    alt="Kalaburgi" 
-                                    class="img-fluid w-100" 
-                                    style="height: 400px; object-fit: cover;">
-                                <div class="position-absolute top-50 start-50 translate-middle text-white" 
-                                    style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
-                                    <h1 class="display-5 font-weight-bold">Kalaburgi</h1>
-                                    <p class="lead">Kalaburagi is a city bursting with charm</p>
-                                </div>
-                            </div>
-                        </div>
+<style>
 
-                        <!-- Belagavi  -->
-                        <div class="carousel-item">
-                            <div class="position-relative overflow-hidden text-center">
-                                <img src="https://s7ap1.scene7.com/is/image/incredibleindia/1-kamal-basti-belgaum-karnataka-attr-hero?qlt=82&ts=1726717486983" 
-                                    alt="Belagavi " 
-                                    class="img-fluid w-100" 
-                                    style="height: 400px; object-fit: cover;">
-                                <div class="position-absolute top-50 start-50 translate-middle text-white" 
-                                    style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
-                                    <h1 class="display-5 font-weight-bold">Belagavi</h1>
-                                    <p class="lead">Belagavi is one of the oldest, and well cultured historical place high in the Western Ghats</p>
-                                </div>
-                            </div>
-                        </div>
+body {
+    background: #050505;
+}
 
-                        <!-- Hubli  -->
-                        <div class="carousel-item">
-                            <div class="position-relative overflow-hidden text-center">
-                                <img src="https://s3.india.com/wp-content/uploads/2024/09/lesser-kmown-hubli.jpg" 
-                                    alt="Hubli " 
-                                    class="img-fluid w-100" 
-                                    style="height: 400px; object-fit: cover;">
-                                <div class="position-absolute top-50 start-50 translate-middle text-white" 
-                                    style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
-                                    <h1 class="display-5 font-weight-bold">Hubli</h1>
-                                    <p class="lead">HUBBALLI is a city of best food best culture</p>
-                                </div>
-                            </div>
-                        </div>
-                
-                        <!-- Carousel Controls (optional) -->
-                        <button class="carousel-control-prev" type="button" data-bs-target="#touristCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#touristCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
 
-                
-                
-                <div class="col-md-4" th:each="product : ${products}">
-                    <div class="card mb-4 shadow-sm">
-                        <img th:if="${product.base64Image}" 
-                             th:src="'data:image/jpeg;base64,' + ${product.base64Image}" 
-                             class="card-img-top" 
-                             alt="Product Image" 
-                             style="width: 100%; height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${product.productName}">Product Name</h5>
-                            <p class="card-text" th:text="${product.productDescription}">Product Description</p>
-                            <p class="card-text">
-                                <strong th:text="${product.price}">Product Price</strong>
-                            </p>
-                            <!-- <div class="form-group">
-                                <label for="quantity">Select Quantity:</label>
-                                <input class="form-control" type="number" id="quantity" name="quantity" min="1" max="10" value="1">
-                            </div>
-                            <button class="btn btn-primary mt-2" type="button">Add to Cart</button> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>    
-    <!-- Main Content -->
+/* Page animation */
+.ninja-page {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to {
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* Hero */
+
+.hero {
+
+    height:500px;
+    background:
+    linear-gradient(
+        rgba(0,0,0,.65),
+        rgba(0,0,0,.85)
+    ),
+    url("https://wallpapercave.com/wp/wp4923981.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+
+    position:relative;
+    overflow:hidden;
+
+}
+
+
+.hero:before {
+
+    content:"";
+
+    position:absolute;
+
+    width:200%;
+    height:200%;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,165,0,.25),
+    transparent 40%);
+
+    animation:
+    rotateGlow 8s linear infinite;
+
+}
+
+
+@keyframes rotateGlow {
+
+    from {
+        transform:rotate(0deg);
+    }
+
+    to {
+        transform:rotate(360deg);
+    }
+
+}
+
+
+.hero-content {
+
+    position:relative;
+    z-index:2;
+
+    text-align:center;
+
+}
+
+
+.hero h1 {
+
+    font-size:70px;
+    font-weight:900;
+
+    color:#ff9800;
+
+    text-shadow:
+    0 0 10px orange,
+    0 0 30px red;
+
+    animation:
+    ninjaTitle 2s infinite alternate;
+
+}
+
+
+@keyframes ninjaTitle {
+
+    from {
+        transform:scale(1);
+    }
+
+    to {
+        transform:scale(1.05);
+    }
+
+}
+
+
+
+.ninja-btn {
+
+    border-radius:30px;
+
+    padding:
+    12px 35px;
+
+    font-weight:bold;
+
+    transition:.4s;
+
+}
+
+
+.ninja-btn:hover {
+
+    transform:
+    translateY(-8px)
+    scale(1.05);
+
+    box-shadow:
+    0 0 25px orange;
+
+}
+
+
+
+/* Floating kunai */
+
+.kunai {
+
+position:absolute;
+
+font-size:50px;
+
+animation:
+flyKunai 6s linear infinite;
+
+}
+
+
+@keyframes flyKunai {
+
+
+0%{
+
+left:-100px;
+top:30%;
+
+}
+
+
+100%{
+
+left:110%;
+top:70%;
+
+}
+
+
+}
+
+
+/* Product cards */
+
+
+.product-card {
+
+background:
+linear-gradient(
+135deg,
+#171717,
+#2b0000
+);
+
+color:white;
+
+border-radius:20px;
+
+overflow:hidden;
+
+transition:.5s;
+
+position:relative;
+
+}
+
+
+.product-card:hover {
+
+transform:
+translateY(-15px)
+rotateY(8deg);
+
+box-shadow:
+0 0 35px red;
+
+}
+
+
+
+.product-card img {
+
+height:250px;
+
+object-fit:cover;
+
+transition:.5s;
+
+}
+
+
+
+.product-card:hover img {
+
+transform:scale(1.1);
+
+}
+
+
+
+.badge-ninja {
+
+position:absolute;
+
+top:15px;
+right:15px;
+
+background:#ff9800;
+
+color:black;
+
+padding:8px 15px;
+
+border-radius:20px;
+
+font-weight:bold;
+
+}
+
+
+
+/* Sharingan animation */
+
+
+.sharingan {
+
+width:80px;
+height:80px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+black 10%,
+red 30%,
+black 70%
+);
+
+animation:
+
+spin 3s linear infinite;
+
+margin:auto;
+
+}
+
+
+
+@keyframes spin {
+
+from {
+transform:rotate(0);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+
+
+/* Footer */
+
+.ninja-footer {
+
+background:
+
+linear-gradient(
+90deg,
+#000,
+#450000
+);
+
+padding:50px;
+
+color:white;
+
+text-align:center;
+
+}
+
+
+</style>
+
+
+
+<main class="ninja-page">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+
+<div class="kunai">
+⚔️
+</div>
+
+
+<div class="hero-content">
+
+
+<div class="sharingan"></div>
+
+
+<h1>
+🍃 Hidden Leaf Marketplace
+</h1>
+
+
+<p class="lead">
+
+Become a shinobi.
+Explore legendary weapons,
+Akatsuki collections,
+Hokage merchandise and ninja gear.
+
+</p>
+
+
+
+<a href="/login"
+class="btn btn-warning ninja-btn">
+
+🔥 Enter Village
+
+</a>
+
+
+<a href="/signup"
+class="btn btn-danger ninja-btn">
+
+🍥 Join Shinobi Clan
+
+</a>
+
+
+</div>
+
+
 </section>
+
+
+
+
+<!-- Quote -->
+
+<div class="container text-center my-5 text-white">
+
+
+<h2 class="text-warning">
+
+Believe It!
+
+</h2>
+
+
+<p class="lead">
+
+"Hard work beats talent when talent doesn't work hard."
+
+</p>
+
+
+</div>
+
+
+
+
+<!-- PRODUCTS -->
+
+<div class="container">
+
+
+<div class="row g-4">
+
+
+<div class="col-md-4"
+th:each="product : ${products}">
+
+
+<div class="product-card shadow">
+
+
+<span class="badge-ninja">
+
+🍥 Ninja Gear
+
+</span>
+
+
+<img th:if="${product.base64Image}"
+
+th:src="'data:image/jpeg;base64,' + ${product.base64Image}"
+
+class="w-100"
+
+alt="Product Image">
+
+
+<div class="p-4">
+
+
+<h4
+
+th:text="${product.productName}">
+
+Naruto Product
+
+</h4>
+
+
+<p
+
+th:text="${product.productDescription}">
+
+Description
+
+</p>
+
+
+<h3 class="text-warning"
+
+th:text="'₹ '+${product.price}">
+
+₹999
+
+</h3>
+
+
+
+<a href="/login"
+
+class="btn btn-danger ninja-btn">
+
+Add To Cart 🛒
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<!-- FOOTER -->
+
+
+<footer class="ninja-footer mt-5">
+
+
+<h2>
+
+🍃 The Will Of Fire
+
+</h2>
+
+
+<p>
+
+Inspired by Naruto Uzumaki,
+Sasuke Uchiha,
+Kakashi Hatake and the legendary Hokage.
+
+</p>
+
+
+<a href="/signup"
+
+class="btn btn-warning ninja-btn">
+
+Start Ninja Journey
+
+</a>
+
+
+</footer>
+
+
+
+</main>
+
+
+</section>
+
+
 </body>
+
 </html>
