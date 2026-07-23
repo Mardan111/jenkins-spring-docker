@@ -18,6 +18,15 @@ pipeline {
     }
 
     stages {
+        stage('Check Java Version') {
+          steps {
+                    sh '''
+                    java -version
+                    javac -version
+                    mvn -version
+                    '''
+           }
+        }   
         stage('Build JAR') {
             when {
                 expression { params.ACTION == 'DEPLOY' }
