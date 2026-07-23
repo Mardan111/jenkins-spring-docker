@@ -1,46 +1,699 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="~{base::layout(~{::section})}">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      th:replace="~{base::layout(~{::section})}">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shinobi Login</title>
+
+
+<style>
+
+
+body {
+
+    overflow-x:hidden;
+
+}
+
+
+
+/* Main Container */
+
+.login-page {
+
+
+min-height:90vh;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+background:
+
+
+linear-gradient(
+
+135deg,
+
+rgba(0,0,0,.8),
+
+rgba(120,0,0,.7)
+
+),
+
+url("https://wallpapercave.com/wp/wp4923989.jpg");
+
+
+background-size:cover;
+
+
+background-position:center;
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+
+/* Chakra particles */
+
+
+.chakra {
+
+
+position:absolute;
+
+
+width:25px;
+
+
+height:25px;
+
+
+background:#ff9800;
+
+
+border-radius:50%;
+
+
+box-shadow:
+
+0 0 20px orange;
+
+
+animation:
+
+float 6s infinite;
+
+
+}
+
+
+
+.c1{
+
+left:15%;
+
+top:20%;
+
+}
+
+
+
+.c2{
+
+left:80%;
+
+top:40%;
+
+animation-delay:2s;
+
+}
+
+
+
+.c3{
+
+left:50%;
+
+top:80%;
+
+animation-delay:4s;
+
+}
+
+
+
+
+@keyframes float {
+
+
+0%{
+
+transform:translateY(0);
+
+opacity:.3;
+
+}
+
+
+50%{
+
+transform:translateY(-120px);
+
+opacity:1;
+
+}
+
+
+100%{
+
+transform:translateY(0);
+
+opacity:.3;
+
+}
+
+
+}
+
+
+
+
+
+/* Login Card */
+
+
+.shinobi-card {
+
+
+width:420px;
+
+
+padding:35px;
+
+
+background:
+
+
+rgba(0,0,0,.85);
+
+
+border-radius:25px;
+
+
+border:
+
+1px solid orange;
+
+
+box-shadow:
+
+
+0 0 40px red;
+
+
+animation:
+
+cardEntry 1s ease;
+
+
+}
+
+
+
+
+
+@keyframes cardEntry {
+
+
+from{
+
+
+opacity:0;
+
+
+transform:
+
+translateY(80px);
+
+
+}
+
+
+to{
+
+
+opacity:1;
+
+
+transform:
+
+translateY(0);
+
+
+}
+
+
+}
+
+
+
+
+
+
+/* Sharingan */
+
+
+.sharingan {
+
+
+height:90px;
+
+
+width:90px;
+
+
+margin:auto;
+
+
+border-radius:50%;
+
+
+background:
+
+
+radial-gradient(
+
+circle,
+
+black 20%,
+
+red 45%,
+
+black 70%
+
+);
+
+
+
+box-shadow:
+
+0 0 30px red;
+
+
+
+animation:
+
+spin 5s linear infinite;
+
+
+}
+
+
+
+
+@keyframes spin {
+
+
+from{
+
+transform:rotate(0deg);
+
+}
+
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+.title {
+
+
+color:#ff9800;
+
+
+font-weight:900;
+
+
+font-size:35px;
+
+
+text-align:center;
+
+
+text-shadow:
+
+
+0 0 15px orange;
+
+
+}
+
+
+
+
+.subtitle {
+
+
+color:white;
+
+
+text-align:center;
+
+
+margin-bottom:25px;
+
+
+}
+
+
+
+
+.ninja-input {
+
+
+background:#111!important;
+
+
+border:
+
+1px solid orange!important;
+
+
+color:white!important;
+
+
+border-radius:15px;
+
+
+padding:12px;
+
+
+}
+
+
+
+.ninja-input:focus {
+
+
+box-shadow:
+
+0 0 20px orange!important;
+
+
+}
+
+
+
+
+.fire-button {
+
+
+width:100%;
+
+
+border:none;
+
+
+padding:14px;
+
+
+border-radius:30px;
+
+
+background:
+
+
+linear-gradient(
+
+45deg,
+
+orange,
+
+red
+
+);
+
+
+color:white;
+
+
+font-weight:bold;
+
+
+font-size:18px;
+
+
+transition:.4s;
+
+
+}
+
+
+
+
+.fire-button:hover {
+
+
+transform:
+
+scale(1.08);
+
+
+box-shadow:
+
+0 0 30px orange;
+
+
+}
+
+
+
+
+
+.footer-link {
+
+
+color:#ffc107;
+
+
+text-decoration:none;
+
+
+}
+
+
+
+.footer-link:hover {
+
+
+color:red;
+
+
+}
+
+
+
+
+</style>
+
+
 </head>
+
+
+
 <body>
-    <section>
-<div class="container p-5">
-    <div class="row">
-        <div class="col-md-6 p-5">
-            <img alt=""
-                src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-working-with-laptop-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--on-workplace-work-pack-people-illustrations-5282908.png?f=webp"
-                width="100%" height="500px">
-        </div>
-        <div class="col-md-6 mt-5 p-5">
-            <div class="card shadow-lg p-3 mb-5 bg-body rounded">
-                <div class="card-header">
-                    <p class="fs-4 text-center">Login</p>
-                </div>
-                <div class="card-body">
-                    <form th:action="@{/login}" method="post">
-                        <div class="mb-3">
-                            <label class="form-label" for="userName">UserName</label>
-                            <input class="form-control" type="text" id="userName" name="userName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="password">Password</label>
-                            <input class="form-control" type="password" id="password" name="password" required>
-                        </div>
-                        <button type="submit" class="btn bg-primary text-white col-md-12">Login</button>
-                    </form>
-                    <div th:if="${error}" th:text="${error}"></div>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="#" class="text-decoration-none">Forgot Password</a>
-                    <br> Don't have a account ? <a href="/signup" class="text-decoration-none">Create one</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+<section>
+
+
+<div class="login-page">
+
+
+<div class="chakra c1"></div>
+
+<div class="chakra c2"></div>
+
+<div class="chakra c3"></div>
+
+
+
+
+
+<div class="shinobi-card">
+
+
+<div class="sharingan"></div>
+
+
+
+<h1 class="title">
+
+🍃 Will of Fire
+
+</h1>
+
+
+
+<p class="subtitle">
+
+Enter the Hidden Leaf Village
+
+</p>
+
+
+
+
+
+<form th:action="@{/login}" method="post">
+
+
+
+<div class="mb-3">
+
+
+<label class="text-white">
+
+Shinobi Name
+
+</label>
+
+
+<input
+
+class="form-control ninja-input"
+
+type="text"
+
+id="userName"
+
+name="userName"
+
+placeholder="Enter username"
+
+required>
+
+
 </div>
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="text-white">
+
+Secret Jutsu Password
+
+</label>
+
+
+
+<input
+
+class="form-control ninja-input"
+
+type="password"
+
+id="password"
+
+name="password"
+
+placeholder="Enter password"
+
+required>
+
+
+</div>
+
+
+
+
+
+
+<button
+
+type="submit"
+
+class="fire-button">
+
+🔥 Enter Village
+
+</button>
+
+
+
+</form>
+
+
+
+
+
+<div class="text-center mt-4 text-white">
+
+
+<a href="#"
+
+class="footer-link">
+
+Forgot Password?
+
+</a>
+
+
+<br>
+
+
+Don't have a clan?
+
+
+<a href="/signup"
+
+class="footer-link">
+
+Create Shinobi Account
+
+</a>
+
+
+</div>
+
+
+
+<div th:if="${error}"
+
+class="text-danger text-center mt-3"
+
+th:text="${error}">
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
 </section>
+
+
+
 </body>
+
+
 </html>
