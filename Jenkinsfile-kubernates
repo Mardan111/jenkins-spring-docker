@@ -33,6 +33,25 @@ pipeline {
 
     stages {
 
+        stage('Check Repository') {
+
+            steps {
+
+                sh '''
+                echo "Current directory:"
+                pwd
+
+                echo "Repository contents:"
+                ls -la
+
+                echo "Kubernetes folder:"
+                ls -la k8s
+
+                echo "Database folder:"
+                ls -la k8s/database
+                '''
+            }
+        }
 
         stage('Execute Kubernetes Action') {
 
