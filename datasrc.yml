@@ -1,15 +1,50 @@
+# Persistent Volume
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: mysql-pv
+
+
+spec:
+
+  capacity:
+
+    storage: 5Gi
+
+
+  accessModes:
+
+    - ReadWriteOnce
+
+
+  persistentVolumeReclaimPolicy: Retain
+
+
+  hostPath:
+
+    path: /data/mysql
+
+
+
+---
+# Persistent Volume Claim
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 
 metadata:
+
   name: mysql-pvc
+
   namespace: prod
+
 
 spec:
 
   accessModes:
 
-  - ReadWriteOnce
+    - ReadWriteOnce
 
 
   resources:
@@ -19,7 +54,13 @@ spec:
       storage: 5Gi
 
 
+  volumeName: mysql-pv
+
+
+
 ---
+# MySQL ClusterIP Service
+
 apiVersion: v1
 kind: Service
 
@@ -42,12 +83,17 @@ spec:
 
   ports:
 
-  - port: 3306
+    - name: mysql
 
-    targetPort: 3306
+      port: 3306
+
+      targetPort: 3306
+
 
 
 ---
+# MySQL StatefulSet
+
 apiVersion: apps/v1
 kind: StatefulSet
 
@@ -61,6 +107,7 @@ metadata:
 spec:
 
   serviceName: mysql
+
 
   replicas: 1
 
@@ -83,7 +130,9 @@ spec:
 
     spec:
 
+
       containers:
+
 
       - name: mysql
 
@@ -92,7 +141,10 @@ spec:
 
         ports:
 
-        - containerPort: 3306
+        - name: mysql
+
+          containerPort: 3306
+
 
 
         env:
@@ -109,6 +161,7 @@ spec:
               key: MYSQL_ROOT_PASSWORD
 
 
+
         - name: MYSQL_DATABASE
 
           valueFrom:
@@ -123,13 +176,71 @@ spec:
 
         volumeMounts:
 
+
         - name: mysql-storage
 
           mountPath: /var/lib/mysql
 
 
 
+        readinessProbe:
+
+          exec:
+
+            command:
+
+            - sh
+
+            - -c
+
+            - mysqladmin ping -h localhost -uroot -p$MYSQL_ROOT_PASSWORD
+
+
+          initialDelaySeconds: 30
+
+          periodSeconds: 10
+
+
+
+        livenessProbe:
+
+          exec:
+
+            command:
+
+            - sh
+
+            - -c
+
+            - mysqladmin ping -h localhost -uroot -p$MYSQL_ROOT_PASSWORD
+
+
+          initialDelaySeconds: 60
+
+          periodSeconds: 20
+
+
+
+        resources:
+
+
+          requests:
+
+            cpu: "250m"
+
+            memory: "512Mi"
+
+
+          limits:
+
+            cpu: "500m"
+
+            memory: "1Gi"
+
+
+
       volumes:
+
 
       - name: mysql-storage
 
