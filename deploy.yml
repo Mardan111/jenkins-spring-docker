@@ -116,7 +116,7 @@ metadata:
 
 spec:
 
-  type: NodePort
+  type: ClusterIP
 
 
   selector:
@@ -130,4 +130,3 @@ spec:
 
     targetPort: 8085
 
-    nodePort: 30082
