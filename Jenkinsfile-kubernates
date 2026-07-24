@@ -67,8 +67,7 @@ pipeline {
 
                         sh '''
 
-                        kubectl apply \
-                        -f k8s/app/
+                        kubectl apply -f deploy.yml
 
 
                         kubectl rollout status \
@@ -87,8 +86,7 @@ pipeline {
 
                         sh '''
 
-                        kubectl apply \
-                        -f k8s/database/
+                        kubectl apply -f datasrc.yml 
 
 
                         kubectl rollout status \
