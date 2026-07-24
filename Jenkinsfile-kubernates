@@ -5,30 +5,27 @@ pipeline {
 
     parameters {
 
-
         choice(
-
             name: 'ACTION',
-
             choices: [
-
                 'Deploy App',
-
                 'Deploy Database',
-
                 'Remove App',
-
                 'Remove Database'
-
             ],
-
             description: 'Select Kubernetes operation'
-
         )
-
 
     }
 
+
+    environment {
+
+        MYSQL_ROOT_PASSWORD = "root123"
+
+        MYSQL_DATABASE = "mydatabase"
+
+    }
 
 
     stages {
@@ -43,66 +40,117 @@ pipeline {
                 script {
 
 
-                    if(params.ACTION == 'Deploy App') {
+                    if (params.ACTION == 'Deploy Database') {
 
 
                         sh '''
+
+                        echo "Removing old MySQL secret if exists"
+
+
+                        kubectl delete secret mysql-secret \
+                        -n prod \
+                        --ignore-not-found=true
+
+
+
+                        echo "Creating MySQL secret"
+
+
+                        kubectl create secret generic mysql-secret \
+                        -n prod \
+                        --from-literal=MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
+                        --from-literal=MYSQL_DATABASE=${MYSQL_DATABASE}
+
+
+
+                        echo "Deploying MySQL Database"
+
+
+                        kubectl apply -f datasrc.yml
+
+
+
+                        kubectl rollout status \
+                        statefulset/mysql \
+                        -n prod \
+                        --timeout=180s
+
+
+                        '''
+
+                    }
+
+
+                    else if (params.ACTION == 'Deploy App') {
+
+
+                        sh '''
+
+                        echo "Checking MySQL secret"
+
+
+                        kubectl get secret mysql-secret \
+                        -n prod
+
+
+
+                        echo "Deploying Spring Boot Application"
+
 
                         kubectl apply -f deploy.yml
 
 
+
                         kubectl rollout status \
                         deployment/spring-app \
-                        -n prod
+                        -n prod \
+                        --timeout=180s
+
 
                         '''
-
 
                     }
 
 
-
-                    else if(params.ACTION == 'Deploy Database') {
-
-
-                        sh '''
-
-                        kubectl apply -f datasrc.yml 
-
-
-                        kubectl rollout status \
-                        deployment/mysql \
-                        -n prod
-
-                        '''
-
-
-                    }
-
-
-
-                    else if(params.ACTION == 'Remove App') {
+                    else if (params.ACTION == 'Remove App') {
 
 
                         sh '''
+
+                        echo "Removing Spring Boot Application"
+
 
                         kubectl delete \
-                        -f k8s/app/
+                        -f deploy.yml \
+                        --ignore-not-found=true
+
 
                         '''
-
 
                     }
 
 
-
-                    else if(params.ACTION == 'Remove Database') {
+                    else if (params.ACTION == 'Remove Database') {
 
 
                         sh '''
 
+                        echo "Removing MySQL Database"
+
+
                         kubectl delete \
-                        -f k8s/database/
+                        -f datasrc.yml \
+                        --ignore-not-found=true
+
+
+
+                        echo "Removing MySQL Secret"
+
+
+                        kubectl delete secret mysql-secret \
+                        -n prod \
+                        --ignore-not-found=true
 
 
                         '''
@@ -111,7 +159,6 @@ pipeline {
 
 
                 }
-
 
             }
 
@@ -128,9 +175,14 @@ pipeline {
 
             sh '''
 
+            echo "Current Kubernetes Status"
+
+
             kubectl get pods -n prod || true
 
+
             kubectl get svc -n prod || true
+
 
             '''
 
