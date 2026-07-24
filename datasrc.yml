@@ -1,13 +1,4 @@
-apiVersion: v1
-kind: Namespace
-
-metadata:
-  name: prod
-
-
 ---
-# MySQL Credentials
-
 apiVersion: v1
 kind: Secret
 
