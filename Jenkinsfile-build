@@ -5,17 +5,19 @@ pipeline {
     tools{
         maven 'maven'
     }
-
     environment {
 
-        IMAGE_NAME = "mardan112/jenkinsimage:latest"
+        DOCKER_IMAGE = "mardan112/jenkinsimage"
+
+        IMAGE_TAG = "${BUILD_NUMBER}"
+
     }
 
 
     stages {
 
 
-        stage('Checkout Code') {
+        stage('Checkout') {
 
             steps {
 
@@ -26,14 +28,30 @@ pipeline {
         }
 
 
+        stage('Build Spring Boot') {
 
-        stage('Maven Build') {
+            steps {
+
+                sh '''
+                mvn clean package -DskipTests
+                '''
+            }
+
+        }
+
+
+        stage('Build Docker Image') {
 
             steps {
 
                 sh '''
 
-                mvn clean package -DskipTests
+                docker build \
+                -t ${DOCKER_IMAGE}:${IMAGE_TAG} .
+
+                docker tag \
+                ${DOCKER_IMAGE}:${IMAGE_TAG} \
+                ${DOCKER_IMAGE}:latest
 
                 '''
 
@@ -42,46 +60,35 @@ pipeline {
         }
 
 
-
-        stage('Docker Build') {
-
-            steps {
-
-                sh """
-
-                docker build \
-                -t newanime .
-
-                """
-
-            }
-
-        }
-
-
-
-        stage('Docker Login and Push') {
-
+        stage('Login and Push Docker Image') {
 
             steps {
-
 
                 withCredentials([usernamePassword(
-
                     credentialsId: 'dockerhub',
-
-                    usernameVariable: 'DOCKER_USER',
-
+                    usernameVariable: 'DOCKER_USERNAME',
                     passwordVariable: 'DOCKER_PASSWORD'
-
                 )]) {
 
 
-                    sh """
-                        docker tag newanime:latest dockerhub-mardan112/jenkinsimage:latest
-                        docker images
-                        docker push mardan112/jenkinsimage:latest
-                    """
+                    sh '''
+
+                    echo $DOCKER_PASSWORD | docker login \
+                    -u $DOCKER_USERNAME \
+                    --password-stdin
+
+
+                    docker push \
+                    ${DOCKER_IMAGE}:${IMAGE_TAG}
+
+
+                    docker push \
+                    ${DOCKER_IMAGE}:latest
+
+
+                    docker logout
+
+                    '''
 
                 }
 
@@ -90,26 +97,13 @@ pipeline {
         }
 
 
-
-        stage('Cleanup Docker System') {
-
+        stage('Cleanup') {
 
             steps {
 
-
                 sh '''
 
-                docker logout
-
-
                 docker image prune -f
-
-
-                docker container prune -f
-
-
-                rm -rf target/
-
 
                 '''
 
@@ -120,12 +114,9 @@ pipeline {
     }
 
 
-
     post {
 
-
         always {
-
 
             cleanWs()
 
