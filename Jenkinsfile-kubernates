@@ -1,0 +1,143 @@
+pipeline {
+
+    agent any
+
+
+    parameters {
+
+
+        choice(
+
+            name: 'ACTION',
+
+            choices: [
+
+                'Deploy App',
+
+                'Deploy Database',
+
+                'Remove App',
+
+                'Remove Database'
+
+            ],
+
+            description: 'Select Kubernetes operation'
+
+        )
+
+
+    }
+
+
+
+    stages {
+
+
+        stage('Execute Kubernetes Action') {
+
+
+            steps {
+
+
+                script {
+
+
+                    if(params.ACTION == 'Deploy App') {
+
+
+                        sh '''
+
+                        kubectl apply \
+                        -f k8s/app/
+
+
+                        kubectl rollout status \
+                        deployment/spring-app \
+                        -n prod
+
+                        '''
+
+
+                    }
+
+
+
+                    else if(params.ACTION == 'Deploy Database') {
+
+
+                        sh '''
+
+                        kubectl apply \
+                        -f k8s/database/
+
+
+                        kubectl rollout status \
+                        deployment/mysql \
+                        -n prod
+
+                        '''
+
+
+                    }
+
+
+
+                    else if(params.ACTION == 'Remove App') {
+
+
+                        sh '''
+
+                        kubectl delete \
+                        -f k8s/app/
+
+                        '''
+
+
+                    }
+
+
+
+                    else if(params.ACTION == 'Remove Database') {
+
+
+                        sh '''
+
+                        kubectl delete \
+                        -f k8s/database/
+
+
+                        '''
+
+                    }
+
+
+                }
+
+
+            }
+
+        }
+
+    }
+
+
+    post {
+
+
+        always {
+
+
+            sh '''
+
+            kubectl get pods -n prod || true
+
+            kubectl get svc -n prod || true
+
+            '''
+
+        }
+
+    }
+
+}
