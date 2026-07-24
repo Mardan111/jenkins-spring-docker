@@ -9,9 +9,6 @@ pipeline {
     environment {
 
         IMAGE_NAME = "mardan112/jenkinsimage:latest"
-
-        IMAGE_TAG = "${BUILD_NUMBER}"
-
     }
 
 
@@ -53,7 +50,7 @@ pipeline {
                 sh """
 
                 docker build \
-                -t $IMAGE_NAME:$IMAGE_TAG .
+                -t newanime .
 
                 """
 
@@ -81,24 +78,9 @@ pipeline {
 
 
                     sh """
-
-                    echo $DOCKER_PASSWORD | docker login \
-                    -u $DOCKER_USER \
-                    --password-stdin
-
-
-                    docker push \
-                    $IMAGE_NAME:$IMAGE_TAG
-
-
-                    docker tag \
-                    $IMAGE_NAME:$IMAGE_TAG \
-                    $IMAGE_NAME:latest
-
-
-                    docker push \
-                    $IMAGE_NAME:latest
-
+                        docker tag newanime:latest dockerhub-mardan112/jenkinsimage:latest
+                        docker images
+                        docker push mardan112/jenkinsimage:latest
                     """
 
                 }
