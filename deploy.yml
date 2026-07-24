@@ -1,7 +1,9 @@
 apiVersion: v1
 kind: Namespace
+
 metadata:
   name: prod
+
 
 ---
 apiVersion: apps/v1
@@ -11,18 +13,25 @@ metadata:
   name: spring-app
   namespace: prod
 
+
 spec:
+
   replicas: 2
 
+
   selector:
+
     matchLabels:
       app: web
+
 
   template:
 
     metadata:
+
       labels:
         app: web
+
 
     spec:
 
@@ -30,7 +39,7 @@ spec:
 
       - name: spring-app
 
-        image: mardan112/myanime:latest
+        image: mardan112/jenkinsimage:latest
 
         imagePullPolicy: Always
 
@@ -43,21 +52,23 @@ spec:
 
         env:
 
-        # Database URL
+
         - name: DB_URL
-          value: jdbc:mysql://mysql:3306/employee
+          value: jdbc:mysql://mysql:3306/mydatabase
 
 
-        # Database Username
         - name: DB_USER
           value: root
 
 
-        # Database Password from Kubernetes Secret
         - name: DB_PASSWORD
+
           valueFrom:
+
             secretKeyRef:
+
               name: mysql-secret
+
               key: MYSQL_ROOT_PASSWORD
 
 
@@ -66,12 +77,12 @@ spec:
 
           httpGet:
 
-            path: /
+            path: /actuator/health
 
-            port: 8080
+            port: 8085
 
 
-          initialDelaySeconds: 30
+          initialDelaySeconds: 40
 
           periodSeconds: 10
 
@@ -81,9 +92,9 @@ spec:
 
           httpGet:
 
-            path: /
+            path: /actuator/health
 
-            port: 8080
+            port: 8085
 
 
           initialDelaySeconds: 60
@@ -115,10 +126,8 @@ spec:
 
   ports:
 
-  - name: http
+  - port: 80
 
-    port: 80
-
-    targetPort: 8080
+    targetPort: 8085
 
     nodePort: 30082

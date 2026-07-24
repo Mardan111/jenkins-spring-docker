@@ -1,37 +1,53 @@
 pipeline {
 
+
     agent any
+
 
 
     parameters {
 
+
         choice(
-            name: 'ACTION',
-            choices: [
-                'Deploy App',
+
+            name:'ACTION',
+
+            choices:[
+
                 'Deploy Database',
+
+                'Deploy App',
+
                 'Remove App',
+
                 'Remove Database'
+
             ],
-            description: 'Select Kubernetes operation'
+
+            description:'Kubernetes Action'
+
         )
 
     }
 
 
+
     environment {
 
-        MYSQL_ROOT_PASSWORD = "root123"
 
-        MYSQL_DATABASE = "mydatabase"
+        MYSQL_PASSWORD="root123"
+
+        MYSQL_DATABASE="mydatabase"
+
 
     }
+
 
 
     stages {
 
 
-        stage('Execute Kubernetes Action') {
+        stage('Execute') {
 
 
             steps {
@@ -40,12 +56,15 @@ pipeline {
                 script {
 
 
-                    if (params.ACTION == 'Deploy Database') {
+
+                    if(params.ACTION == 'Deploy Database') {
 
 
                         sh '''
 
-                        echo "Removing old MySQL secret if exists"
+                        kubectl create namespace prod \
+                        --dry-run=client -o yaml | kubectl apply -f -
+
 
 
                         kubectl delete secret mysql-secret \
@@ -54,17 +73,11 @@ pipeline {
 
 
 
-                        echo "Creating MySQL secret"
-
-
                         kubectl create secret generic mysql-secret \
                         -n prod \
-                        --from-literal=MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
+                        --from-literal=MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD} \
                         --from-literal=MYSQL_DATABASE=${MYSQL_DATABASE}
 
-
-
-                        echo "Deploying MySQL Database"
 
 
                         kubectl apply -f datasrc.yml
@@ -74,7 +87,7 @@ pipeline {
                         kubectl rollout status \
                         statefulset/mysql \
                         -n prod \
-                        --timeout=180s
+                        --timeout=300s
 
 
                         '''
@@ -82,21 +95,12 @@ pipeline {
                     }
 
 
-                    else if (params.ACTION == 'Deploy App') {
+
+
+                    else if(params.ACTION == 'Deploy App') {
 
 
                         sh '''
-
-                        echo "Checking MySQL secret"
-
-
-                        kubectl get secret mysql-secret \
-                        -n prod
-
-
-
-                        echo "Deploying Spring Boot Application"
-
 
                         kubectl apply -f deploy.yml
 
@@ -105,7 +109,7 @@ pipeline {
                         kubectl rollout status \
                         deployment/spring-app \
                         -n prod \
-                        --timeout=180s
+                        --timeout=300s
 
 
                         '''
@@ -113,50 +117,41 @@ pipeline {
                     }
 
 
-                    else if (params.ACTION == 'Remove App') {
+
+
+                    else if(params.ACTION == 'Remove App') {
 
 
                         sh '''
 
-                        echo "Removing Spring Boot Application"
-
-
-                        kubectl delete \
-                        -f deploy.yml \
+                        kubectl delete -f deploy.yml \
                         --ignore-not-found=true
-
 
                         '''
 
                     }
 
 
-                    else if (params.ACTION == 'Remove Database') {
+
+
+
+                    else if(params.ACTION == 'Remove Database') {
 
 
                         sh '''
 
-                        echo "Removing MySQL Database"
-
-
-                        kubectl delete \
-                        -f datasrc.yml \
+                        kubectl delete -f datasrc.yml \
                         --ignore-not-found=true
 
-
-
-                        echo "Removing MySQL Secret"
 
 
                         kubectl delete secret mysql-secret \
                         -n prod \
                         --ignore-not-found=true
 
-
                         '''
 
                     }
-
 
                 }
 
@@ -167,6 +162,7 @@ pipeline {
     }
 
 
+
     post {
 
 
@@ -175,11 +171,7 @@ pipeline {
 
             sh '''
 
-            echo "Current Kubernetes Status"
-
-
             kubectl get pods -n prod || true
-
 
             kubectl get svc -n prod || true
 
