@@ -14,7 +14,7 @@ spec:
 
   rules:
 
-  - host: myanime.example.com
+  - host: 172.31.46.206
 
     http:
 
