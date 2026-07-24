@@ -9,16 +9,11 @@ metadata:
 type: Opaque
 
 stringData:
-
   MYSQL_ROOT_PASSWORD: root123
-
   MYSQL_DATABASE: mydatabase
 
 
-
 ---
-# Persistent Volume Claim
-
 apiVersion: v1
 kind: PersistentVolumeClaim
 
@@ -26,64 +21,44 @@ metadata:
   name: mysql-pvc
   namespace: prod
 
-
 spec:
 
   accessModes:
-
     - ReadWriteOnce
 
-
   resources:
-
     requests:
-
       storage: 5Gi
 
 
-
 ---
-# Headless Service for StatefulSet
-
 apiVersion: v1
 kind: Service
 
 metadata:
-
   name: mysql
-
   namespace: prod
-
 
 spec:
 
-  clusterIP: None
+  type: ClusterIP
 
   selector:
-
     app: mysql
-
 
   ports:
 
-    - name: mysql
-
-      port: 3306
-
-      targetPort: 3306
-
+  - name: mysql
+    port: 3306
+    targetPort: 3306
 
 
 ---
-# MySQL StatefulSet
-
 apiVersion: apps/v1
 kind: StatefulSet
 
 metadata:
-
   name: mysql
-
   namespace: prod
 
 
@@ -122,9 +97,7 @@ spec:
         ports:
 
         - name: mysql
-
           containerPort: 3306
-
 
 
         env:
@@ -141,7 +114,6 @@ spec:
               key: MYSQL_ROOT_PASSWORD
 
 
-
         - name: MYSQL_DATABASE
 
           valueFrom:
@@ -155,7 +127,6 @@ spec:
 
 
         volumeMounts:
-
 
         - name: mysql-storage
 
@@ -203,7 +174,6 @@ spec:
 
         resources:
 
-
           requests:
 
             cpu: "250m"
@@ -220,7 +190,6 @@ spec:
 
 
       volumes:
-
 
       - name: mysql-storage
 
